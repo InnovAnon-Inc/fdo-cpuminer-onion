@@ -32,7 +32,7 @@ RUN cd     cpuminer-yescrypt                                          \
 #FROM innovanon/fdo-cpuminer-onion as bootstrap
 #
 FROM bootstrap as profiler
-SHELL ["/bin/sh"]
+SHELL ["/bin/sh", "-c"]
 #RUN ln -sfv /usr/local/bin/cpuminer /usr/local/bin/support
 RUN mkdir -v /var/cpuminer
 COPY ./support  /usr/local/bin/
@@ -213,6 +213,7 @@ ENV RANLIB=
 ENV STRIP=
 RUN cd                           openssl              \
  && ./Configure --prefix=$PREFIX                      \
+        --cross-compile-prefix=$CHOST-                \
 	no-rmd160 no-sctp no-dso no-ssl2              \
 	no-ssl3 no-comp no-idea no-dtls               \
 	no-dtls1 no-err no-psk no-srp                 \
