@@ -10,8 +10,9 @@ RUN cd     cpuminer-yescrypt                                          \
  && cd $PREFIX                                                        \
  && rm -rf etc include lib lib64 man share ssl
 
-FROM innovanon/voidlinux as final
 RUN ls -ltra /opt/cpuminer/bin
+
+FROM innovanon/voidlinux as final
 COPY --from=bootstrap /opt/cpuminer/bin/cpuminer /usr/local/bin/
 COPY                 ./support                   /usr/local/bin/
 ARG TEST
