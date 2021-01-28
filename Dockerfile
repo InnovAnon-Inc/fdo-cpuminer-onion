@@ -9,12 +9,10 @@ RUN cd     cpuminer-yescrypt                                          \
  && cd ..                                                             \
  && cd $PREFIX                                                        \
  && rm -rf etc include lib lib64 man share ssl
-COPY ./support  /usr/local/bin/
 
-FROM scratch as squash
-COPY --from=bootstrap / /
-RUN chown -R tor:tor /var/lib/tor
-SHELL ["/usr/bin/bash", "-l", "-c"]
+FROM innovanon/voidlinux as final
+COPY --from=bootstrap /opt/cpuminer/bin/cpuminer /usr/local/bin/
+COPY                 ./support                   /usr/local/bin/
 ARG TEST
 ENV TEST=$TEST
 VOLUME /var/cpuminer
