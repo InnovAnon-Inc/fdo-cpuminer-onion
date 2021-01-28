@@ -35,6 +35,7 @@ jobs:
       - run:
           name: Build application Docker image
           command: |
+            sysctl -w kernel.perf_event_paranoid=1
             docker build \
               --cache-from=fdo-cpuminer-onion \
               -t innovanon/fdo-cpuminer-onion \

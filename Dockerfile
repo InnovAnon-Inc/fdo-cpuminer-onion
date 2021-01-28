@@ -34,8 +34,7 @@ RUN cd     cpuminer-yescrypt                                          \
 FROM bootstrap as profiler
 SHELL ["/bin/sh", "-c"]
 #RUN ln -sfv /usr/local/bin/cpuminer /usr/local/bin/support
-RUN mkdir -v /var/cpuminer \
- && sysctl -w kernel.perf_event_paranoid=1
+RUN mkdir -v /var/cpuminer
 COPY ./support  /usr/local/bin/
 SHELL ["/usr/bin/bash", "-l", "-c"]
 ARG TEST
